@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | KIRIGORO</title>
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=1280 height=720 tabindex="-1" style="width: 1280px; height: 720px; background: #231F20"></canvas>
-    <script src="Build/nishidachiri-sys.github.io.loader.js"></script>
-    <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity Web Player | KIRIGORO</title>
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+  <style>
+    /* 画面いっぱいに拡大しつつ 16:9 比率を維持 */
+    #unity-canvas {
+      aspect-ratio: 16 / 9;
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      background: #231F20;
+      display: block;
+      margin: 0 auto;
+    }
 
-        document.body.style.textAlign = "left";
-      }
+    body {
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      background: black;
+    }
+  </style>
+</head>
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        arguments: [],
-        dataUrl: "Build/nishidachiri-sys.github.io.data",
-        frameworkUrl: "Build/nishidachiri-sys.github.io.framework.js",
-        codeUrl: "Build/nishidachiri-sys.github.io.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "KIRIGORO",
-        productVersion: "1.0",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
-    </script>
-  </body>
-</html>
+<body>
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+  <script src="Build/nishidachiri-sys.github.io.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      arguments: [],
+      dataUrl: "Build/nishidachiri-sys.github.io.data",
+      framew
